@@ -1,0 +1,48 @@
+﻿
+@model IEnumerable<Hrssu.Models.Entities.Post>
+
+@using System.Text.RegularExpressions;
+@helper Truncate(string input, int lenght)
+{
+    if (input.Length <= lenght)
+    {
+        @Html.Raw(input)
+    }
+    else
+    {
+        @Html.Raw(input.Substring(0, input.IndexOf(" ", lenght)).ToString())
+    }
+}
+
+
+@foreach (var item in Model)
+{
+
+
+    <!-- Single Blog -->
+    <div class="single-blog">
+        <div class="blog-head overlay">
+            <div class="date">
+                <h4>@item.DatePosted.ToString("dd")<span> @item.DatePosted.ToString("MMM")</span></h4>
+            </div>
+            @if (item.PostImages.Count() > 0)
+            {
+                <img width="300" height="200" src="data:image/jpg;base64,@(Convert.ToBase64String(item.PostImages.OrderByDescending(x=>x.Id).FirstOrDefault().ImageContent))" class="attachment-edutech_370x250 size-edutech_370x250 wp-post-image" alt="">
+                <a href="#" class="tran4s"></a>
+
+            }
+        </div>
+        <div class="blog-content">
+            <h4 class="blog-title"><a href="blog-single.html">@item.Title</a></h4>
+            <div class="blog-info">
+                <a href="#"><i class="fa fa-user"></i>By: Admin</a>
+                <a href="#"><i class="fa fa-list"></i>Learning</a>
+                <a href="#"><i class="fa fa-heart-o"></i>230</a>
+            </div>
+            <p>  @Truncate(item.PreviewContent.ToString(), 100) ...</p>
+            <div class="button">
+                <a href="@Url.Action("BlogDetails", "Home",new { id = item.Id})" class="btn">Read More<i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Hrssu.Models.Entities.ImageSlider>
+
+<section class="home-slider">
+    <div class="slider-active">
+        <!-- Single Slider -->
+
+        @foreach (var image in Model)
+        {
+            if (image.Content != null)
+            {
+
+                <img data-u="image" src="data:image/jpg;base64,@(Convert.ToBase64String(image.Content))" data-thumb="data:image/jpg;base64,@(Convert.ToBase64String(image.Content))" alt="dmmmc" />
+
+
+                @*<div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <div class="slider-text">
+                                <h1>The Best Place <span> For Your</span> Child To Be</h1>
+                                <p></p>
+                                <div class="button">
+                                    <a href="courses.html" class="btn primary">Know More</a>
+                                    <a href="about.html" class="btn">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+           
+        <!--/ End Single Slider -->
+            }
+        }
+    </div>
+</section>

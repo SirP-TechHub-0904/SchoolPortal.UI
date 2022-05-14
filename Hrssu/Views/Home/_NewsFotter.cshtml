@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<Hrssu.Models.Entities.Post>
+
+@using System.Text.RegularExpressions;
+@helper Truncate(string input, int lenght)
+{
+    if (input.Length <= lenght)
+    {
+        @Html.Raw(input)
+    }
+    else
+    {
+        @Html.Raw(input.Substring(0, input.IndexOf(" ", lenght)).ToString())
+    }
+}
+
+
+@foreach (var item in Model)
+{
+
+
+    <div class="single-news">
+        @if (item.PostImages.Count() > 0)
+        {
+            <img width="300" height="200" src="data:image/jpg;base64,@(Convert.ToBase64String(item.PostImages.OrderByDescending(x=>x.Id).FirstOrDefault().ImageContent))" class="attachment-edutech_370x250 size-edutech_370x250 wp-post-image" alt="">
+            <a href="#" class="tran4s"></a>
+
+        }
+        <h4><a href="@Url.Action("BlogDetails", "Home",new { id = item.Id})">@item.Title</a></h4>
+        <p> @Truncate(item.PreviewContent.ToString(), 15)</p>
+    </div>
+}

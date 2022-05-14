@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Hrssu.Models.Entities.ImageGallery>
+
+
+
+
+<section class="our-features section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Our <span>Gallery</span></h2>
+                </div>
+            </div>
+        </div>   
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+                <!-- Single Feature -->
+           
+                <div class="single-feature">
+                    <div class="feature-head">
+
+                        @foreach (var image in Model)
+                        {
+                            if (image.Content != null)
+                            {
+
+
+                                <img data-u="image" src="data:image/jpg;base64,@(Convert.ToBase64String(image.Content))" alt="#" />
+
+                            }
+                        }
+
+
+                    </div>
+                </div>
+                <!--/ End Single Feature -->
+            </div>
+
+        </div>
+
+    </div>
+</section>
